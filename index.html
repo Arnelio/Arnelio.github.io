@@ -80,15 +80,15 @@
   </head>
   <body>
     <div class="wrapper">
-        <div onClick="move(this, 0, 0)" class="one"></div>
-        <div onClick="move(this, 0, 1)" class="two"></div>
-        <div onClick="move(this, 0, 2)" class="three"></div>
-        <div onClick="move(this, 1, 0)" class="four"></div>
-        <div onClick="move(this, 1, 1)" class="five"></div>
-        <div onClick="move(this, 1, 2)" class="six"></div>
-        <div onClick="move(this, 2, 0)" class="seven"></div>
-        <div onClick="move(this, 2, 1)" class="eight"></div>
-        <div onClick="move(this, 2, 2)" class="nine"></div>
+        <div id="0" onClick="move(this, 0, 0)" class="one"></div>
+        <div id="1" onClick="move(this, 0, 1)" class="two"></div>
+        <div id="2" onClick="move(this, 0, 2)" class="three"></div>
+        <div id="3" onClick="move(this, 1, 0)" class="four"></div>
+        <div id="4" onClick="move(this, 1, 1)" class="five"></div>
+        <div id="5" onClick="move(this, 1, 2)" class="six"></div>
+        <div id="6" onClick="move(this, 2, 0)" class="seven"></div>
+        <div id="7" onClick="move(this, 2, 1)" class="eight"></div>
+        <div id="8" onClick="move(this, 2, 2)" class="nine"></div>
         <div id="turnIndicator" class="ten">X turn</div>
     </div>
   </body>
@@ -100,13 +100,16 @@
     function move(element, row, col) {
       console.log(`Element: ${element}, Row: ${row}, col: ${col}`);
       // Pabaigti. (Vietoj doges turetu but X arba O) hehe
+if(state[row][col] === '-'){
 	if(xturn === true)
 	{
       		element.innerHTML = "X";
+		state[row][col] = "X";
 	}
 	else
 	{
 		element.innerHTML = "O";
+		state[row][col] = "O";
 	}
 	xturn = !xturn;
 	
@@ -118,11 +121,80 @@
 	{
 		document.getElementById("turnIndicator").innerHTML = "O eile";
 	}
-      
+      }
       checkForWin();
     }
     function checkForWin() {
-      // Pabaigti;
+      // Pabaigti;\
+	
+	for(let i = 0; i < state.length; i++)
+	{
+		for(let j = 0; j < state.length; j++)
+		{	
+			if(state[0][j] === state[1][j] && state[0][j] === state[2][j])
+				{
+					laimejoStulpelis(j);
+					if(state[i][j] === "X")
+						{
+							document.getElementById("turnIndicator").innerHTML = "X WINS";
+							break;
+						}else if(state[i][j] === "O"){
+							document.getElementById("turnIndicator").innerHTML = "O WINS";
+							break;
+						}
+				}
+			if(state[i][0] === state[i][1] && state[i][0] === state[i][2])
+				{
+					laimejoEilute(i);
+					if(state[i][j] === "X")
+						{
+							document.getElementById("turnIndicator").innerHTML = "X WINS";
+							break;
+						}else if(state[i][j] === "O"){
+							document.getElementById("turnIndicator").innerHTML = "O WINS";
+							break;
+						}
+				}
+			if(state[0][0] === state[1][1] && state[0][0] === state[2][2])
+				{
+					if(state[0][0] === "X")
+						{
+							document.getElementById("turnIndicator").innerHTML = "X WINS";
+							break;
+						}else if(state[0][0] === "O"){
+							document.getElementById("turnIndicator").innerHTML = "O WINS";
+							break;
+						}
+				}
+			if(state[0][2] === state[1][1] && state[0][2] === state[2][0])
+				{
+					if(state[0][2] === "X")
+						{
+							document.getElementById("turnIndicator").innerHTML = "X WINS";
+							break;
+						}else if(state[0][2] === "O"){
+							document.getElementById("turnIndicator").innerHTML = "O WINS";
+							break;
+						}
+				}
+		}
+	}
+
+
+
+	
+	function laimejoEilute(nr){
+		if(nr === 0){
+
+		}		
+
+		}
+	function laimejoStulpelis(nr){
+
+		}
+	function laimejoIstrizai(nr){
+		
+		}
     }
   </script>
 </html>
